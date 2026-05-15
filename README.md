@@ -4,6 +4,8 @@ This repository is a standalone Habbo release1 browser runtime package. It conta
 
 It is intentionally not the full multi-version development workspace. It excludes the internal docs, reference captures, extraction scratch files, Auratus workspace, Kepler workspace, and the v7/v14 adapter source that this V1 package does not need.
 
+This is a small part of a bigger archiving/restoration project for pre-flash Habbo. I wanted to continue doing my part to preserve some of the golden days of the intenet.
+
 ## What It Is
 
 This is a browser-native Director/Shockwave compatibility runtime for Habbo release1.
@@ -43,7 +45,7 @@ extracted Director data
 - Roseau server: https://github.com/Quackster/Roseau by Quackster. This package includes a slightly modified Roseau server path so the V1 browser runtime can connect through the WebSocket bridge and preserve the old release1 room/session flow.
 - Thanks to dirplayer for Shockwave runtime inspiration: https://github.com/igorlira/dirplayer-rs
 - Thanks to LibreShockwave for Director/Shockwave parsing and runtime reference material: https://github.com/Quackster/LibreShockwave
-- Thanks to Project Dragon for inspiration around modern source-derived metadata and content configuration.
+- Thanks to Project Dragon for inspiration around modern source-derived metadata and content configuration: https://gitlab.com/asgardjoe/dragon
 
 ## License
 
