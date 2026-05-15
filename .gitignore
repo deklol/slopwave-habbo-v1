@@ -2,5 +2,8 @@ tmp/
 server/Roseau-master/log/
 *.log
 node_modules/
+generated/
+app/dist/assets/
+app/dist/generated/
 .DS_Store
 Thumbs.db

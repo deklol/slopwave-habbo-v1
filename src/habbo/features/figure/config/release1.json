@@ -1,0 +1,76 @@
+{
+  "version": "release1",
+  "mode": "expanded",
+  "genderPolicy": "merged",
+  "sourceFallback": true,
+  "parts": {
+    "hr": {
+      "include": "allValidated",
+      "colors": "sourceAndCustom",
+      "customColorGroups": ["hair"]
+    },
+    "hd": {
+      "include": "allValidated",
+      "colors": "sourceAndCustom",
+      "customColorGroups": ["skin"]
+    },
+    "ch": {
+      "include": "allValidated",
+      "colors": "sourceAndCustom",
+      "customColorGroups": ["clothes"],
+      "tupleMode": "sourceBaseAndSynchronized"
+    },
+    "lg": {
+      "include": "allValidated",
+      "colors": "sourceAndCustom",
+      "customColorGroups": ["clothes"]
+    },
+    "sh": {
+      "include": "allValidated",
+      "colors": "sourceAndCustom",
+      "customColorGroups": ["shoes"]
+    }
+  },
+  "customColors": {
+    "skin": [
+      "255,204,153",
+      "248,229,218",
+      "223,218,190",
+      "146,99,56",
+      "100,70,40",
+      "0,0,0",
+      "255,0,0",
+      "0,0,255"
+    ],
+    "hair": [
+      "224,186,120",
+      "221,169,52",
+      "103,78,59",
+      "51,51,51",
+      "255,0,0",
+      "0,0,255",
+      "0,250,0"
+    ],
+    "clothes": [
+      "232,177,55",
+      "55,232,197",
+      "184,231,55",
+      "55,139,232",
+      "199,69,217",
+      "187,36,48",
+      "51,51,51",
+      "255,255,255",
+      "255,0,0",
+      "0,0,255"
+    ],
+    "shoes": [
+      "175,220,223",
+      "121,94,83",
+      "47,45,38",
+      "51,51,51",
+      "255,255,255",
+      "255,0,0",
+      "0,0,255"
+    ]
+  }
+}

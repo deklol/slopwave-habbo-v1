@@ -1,0 +1,8 @@
+server/Roseau-master/** linguist-vendored
+server/roseau-classes/** linguist-vendored
+app/dist/** linguist-generated
+payload/** linguist-generated
+generated/** linguist-generated
+*.class binary
+*.jar binary
+*.gz binary

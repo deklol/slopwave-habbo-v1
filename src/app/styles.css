@@ -1,0 +1,482 @@
+@font-face {
+  font-family: "Volter Goldfish";
+  src: url("/fonts/volter/volter-goldfish.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Volter Goldfish";
+  src: url("/fonts/volter/volter-bold-goldfish.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+:root {
+  color: #161a1d;
+  background: #f5f7f8;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+html.runtime-game-only,
+html.runtime-game-only body {
+  min-width: 0;
+  background: #000000;
+}
+
+#app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, auto) 340px;
+  grid-template-areas:
+    "toolbar toolbar"
+    "stage debug";
+  gap: 16px;
+  align-items: start;
+  justify-content: center;
+  padding: 24px;
+}
+
+html.runtime-game-only #app {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: #000000;
+}
+
+html.runtime-game-only .runtime-toolbar,
+html.runtime-game-only .runtime-debug-console,
+html.runtime-game-only .runtime-traffic-console,
+html.runtime-game-only .debug-panel {
+  display: none !important;
+}
+
+.runtime-toolbar {
+  grid-area: toolbar;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.runtime-toolbar-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 10px;
+  align-items: stretch;
+}
+
+.runtime-control-group {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  border: 1px solid #c7d0d5;
+  border-radius: 6px;
+  background: #ffffff;
+  padding: 10px;
+}
+
+.runtime-control-group h2 {
+  margin: 0;
+  color: #39474e;
+  font-size: 12px;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.runtime-control-field {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.runtime-control-field span {
+  color: #536269;
+  font-size: 12px;
+  line-height: 1.1;
+}
+
+.version-select,
+.manifest-source-select,
+.loader-logo-select,
+.club-ui-select,
+.rare-catalogue-select,
+.rare-catalogue-apply,
+.auratus-reference-link {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid #9aa6ac;
+  background: #ffffff;
+  color: #161a1d;
+  border-radius: 4px;
+  padding: 7px 9px;
+  font: inherit;
+}
+
+.rare-catalogue-apply {
+  align-self: end;
+  cursor: pointer;
+}
+
+.rare-catalogue-apply:disabled,
+.rare-catalogue-select:disabled {
+  color: #6b7880;
+  background: #eef2f4;
+  cursor: default;
+}
+
+.rare-catalogue-status {
+  margin: 0;
+  color: #536269;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.rare-catalogue-status[data-tone="pending"] {
+  color: #5b5a12;
+}
+
+.rare-catalogue-status[data-tone="warn"] {
+  color: #7b4d00;
+}
+
+.rare-catalogue-status[data-tone="error"] {
+  color: #8a1f1f;
+}
+
+.auratus-reference-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.auratus-reference-link:hover,
+.auratus-reference-link:focus-visible {
+  border-color: #52656f;
+  background: #edf4f7;
+}
+
+.auratus-reference-link.is-disabled {
+  color: #6b7880;
+  background: #eef2f4;
+  cursor: default;
+}
+
+.runtime-status {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 8px 10px;
+  align-items: center;
+  border: 1px solid #c7d0d5;
+  border-left-width: 4px;
+  background: #ffffff;
+  padding: 8px 10px;
+  line-height: 1.35;
+}
+
+.runtime-status strong {
+  white-space: nowrap;
+}
+
+.runtime-status span {
+  min-width: 0;
+}
+
+.runtime-status code {
+  color: #2d4f5b;
+  background: #eef6f8;
+  border: 1px solid #d2e2e7;
+  border-radius: 3px;
+  padding: 2px 5px;
+  font-size: 12px;
+}
+
+.runtime-metrics-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+.runtime-metric {
+  display: grid;
+  gap: 3px;
+  border: 1px solid #c7d0d5;
+  border-radius: 6px;
+  background: #ffffff;
+  padding: 8px 10px;
+  min-width: 0;
+}
+
+.runtime-metric strong {
+  color: #536269;
+  font-size: 12px;
+  line-height: 1.1;
+}
+
+.runtime-metric span {
+  min-width: 0;
+  color: #161a1d;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.runtime-status-playable-reference {
+  border-left-color: #2d8a53;
+}
+
+.runtime-status-extracted-preview {
+  border-left-color: #c2872e;
+}
+
+.runtime-status-adapter-only {
+  border-left-color: #6b7880;
+}
+
+.stage-host {
+  border: 1px solid #9aa6ac;
+  background: #000;
+  line-height: 0;
+  position: relative;
+}
+
+.stage-column {
+  grid-area: stage;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  max-width: 100%;
+}
+
+html.runtime-game-only .stage-column {
+  display: block;
+  max-width: none;
+}
+
+html.runtime-game-only .stage-host {
+  border: 0;
+}
+
+.stage-host canvas {
+  display: block;
+  image-rendering: pixelated;
+  position: relative;
+  z-index: 0;
+}
+
+.director-interaction-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.director-field-control,
+.director-hotspot-control {
+  position: absolute;
+  pointer-events: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  appearance: none;
+  font-family: "Volter Goldfish";
+}
+
+.director-field-control {
+  color: transparent;
+  caret-color: #000000;
+  outline: none;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+}
+
+.director-hotspot-control {
+  color: transparent;
+  cursor: pointer;
+}
+
+.director-hotspot-control[data-director-kind="room"] {
+  cursor: default;
+}
+
+.runtime-debug-console,
+.runtime-traffic-console {
+  max-width: 100%;
+  border: 1px solid #2f4652;
+  background: #101820;
+  color: #d8e6ec;
+  font-family: Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.runtime-traffic-console {
+  border-color: #38432e;
+  background: #10170f;
+}
+
+.debug-console-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #2f4652;
+  background: #17252e;
+}
+
+.debug-console-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.debug-console-header span {
+  color: #9fb7c1;
+  white-space: nowrap;
+}
+
+.debug-console-lines {
+  max-height: 360px;
+  overflow: auto;
+  padding: 8px 10px;
+}
+
+.debug-log-line {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 8px;
+  padding: 1px 0;
+  overflow-wrap: anywhere;
+}
+
+.debug-log-channel {
+  color: #8ccfe1;
+}
+
+.debug-log-divider {
+  color: #9fb7c1;
+  border-top: 1px solid #263944;
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
+.debug-log-ok {
+  color: #c8f0d0;
+}
+
+.debug-log-warn {
+  color: #ffe0a6;
+}
+
+.debug-log-error {
+  color: #ffb8b8;
+}
+
+.debug-panel {
+  grid-area: debug;
+  width: 340px;
+  max-height: calc(100vh - 96px);
+  overflow: auto;
+  border: 1px solid #c7d0d5;
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 6px;
+  line-height: 1.4;
+}
+
+.debug-panel h1 {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+
+.debug-panel h2 {
+  margin: 14px 0 6px;
+  font-size: 13px;
+}
+
+.debug-panel dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 6px 10px;
+}
+
+.debug-panel .debug-subgrid {
+  grid-template-columns: 72px 1fr;
+}
+
+.debug-panel p {
+  margin: 0;
+}
+
+.debug-panel dt {
+  color: #536269;
+}
+
+.debug-panel dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.debug-panel ul {
+  margin: 0;
+  padding: 0 0 0 18px;
+}
+
+.debug-panel li {
+  margin: 4px 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  #app {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "toolbar"
+      "stage"
+      "debug";
+    justify-items: center;
+    padding: 12px;
+  }
+
+  .runtime-toolbar {
+    justify-content: center;
+  }
+
+  .runtime-toolbar-controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .runtime-status {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .runtime-status strong {
+    white-space: normal;
+  }
+
+  .debug-panel {
+    width: min(100%, 360px);
+  }
+}

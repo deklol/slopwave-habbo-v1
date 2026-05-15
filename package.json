@@ -1,0 +1,21 @@
+{
+  "name": "slopwave-habbo-v1",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "start": "node start-v1.mjs",
+    "unpack": "node tools/unpack-source-data.mjs",
+    "dev": "node tools/unpack-source-data.mjs && vite --host 0.0.0.0",
+    "build": "node tools/unpack-source-data.mjs && tsc --noEmit && vite build",
+    "typecheck": "node tools/unpack-source-data.mjs && tsc --noEmit"
+  },
+  "dependencies": {
+    "pixi.js": "^8.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}

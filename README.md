@@ -1,8 +1,8 @@
 # Habbo V1 Browser Runtime
 
-This repository is a standalone Habbo release1 browser runtime package. It contains the built browser client, source-derived assets and JSON metadata, the Roseau V1 server, and the small bridge/launcher tools required to run it locally.
+This repository is a standalone Habbo release1 browser runtime package. It contains the built browser client, the V1-relevant TypeScript runtime source, source-derived assets and JSON metadata, the Roseau V1 server, and the small bridge/launcher tools required to run it locally.
 
-It is intentionally not the full development workspace. It only contains the files needed to run and inspect the V1 portable build.
+It is intentionally not the full multi-version development workspace. It excludes the internal docs, reference captures, extraction scratch files, Auratus workspace, Kepler workspace, and the v7/v14 adapter source that this V1 package does not need.
 
 ## What It Is
 
@@ -54,11 +54,20 @@ Bundled third-party components and source-derived client assets keep their own l
 ## Repository Layout
 
 ```text
+src/
+  V1 browser runtime TypeScript source plus shared Director, Lingo, Pixi, room, window, protocol, and source-backed Habbo runtime modules needed by release1.
+
+public/
+  Editable public config and fonts copied into app/dist when rebuilding.
+
 app/dist/
   Built browser runtime, generated assets, fonts, config, and index page.
 
 app/dist/habbo-config/
   Editable V1 JSON for figure availability, animation metadata, furni metadata, and catalogue data.
+
+payload/
+  Compressed runtime payloads. The launcher and unpack tool extract these on demand so the repo stays small.
 
 server/Roseau-master/
   Roseau release1 server files and SQL seed.
@@ -75,6 +84,40 @@ start-v1.mjs
 start-v1.ps1
   Windows convenience wrapper for the Node launcher.
 ```
+
+## Build From Source
+
+Install the JavaScript toolchain:
+
+```powershell
+npm install
+```
+
+Unpack the source-derived runtime JSON used by the TypeScript imports:
+
+```powershell
+npm run unpack
+```
+
+Type-check the V1 runtime source:
+
+```powershell
+npm run typecheck
+```
+
+Build the browser runtime from TypeScript:
+
+```powershell
+npm run build
+```
+
+The build writes to:
+
+```text
+app/dist/
+```
+
+The source-derived runtime JSON is stored compressed in `payload/source-runtime-data.tar.gz` and extracted into `generated/runtime-data/` when needed. Generated loose files are ignored by git.
 
 ## Setup
 

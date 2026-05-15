@@ -76,6 +76,12 @@ function preparePayloadArchives() {
     requiredPath: path.join(distRoot, "generated", "assets"),
     targetPath: path.join(distRoot, "generated")
   });
+
+  extractArchiveIfMissing({
+    archivePath: path.join(payloadRoot, "source-runtime-data.tar.gz"),
+    requiredPath: path.join(root, "generated", "runtime-data", "release1_roseau_dcr0910-projectorrays-manifest.json"),
+    targetPath: path.join(root, "generated")
+  });
 }
 
 function extractArchiveIfMissing({ archivePath, requiredPath, targetPath }) {
