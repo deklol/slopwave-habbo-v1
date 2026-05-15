@@ -35,13 +35,13 @@ extracted Director data
 ```
 
 ## Screenshots
-! https://i.dek.cx/n8rx.png
-! https://i.dek.cx/17eb.png
-! https://i.dek.cx/4x1f.png
-! https://i.dek.cx/tols.png
-! https://i.dek.cx/3a7k.png
-! https://i.dek.cx/qnd3.png
-! https://i.dek.cx/ab6w.png
+! [Screenshot 1](https://i.dek.cx/n8rx.png)
+! [Screenshot 2](https://i.dek.cx/17eb.png)
+! [Screenshot 3](https://i.dek.cx/4x1f.png)
+! [Screenshot 4](https://i.dek.cx/tols.png)
+! [Screenshot 5](https://i.dek.cx/3a7k.png)
+! [Screenshot 6](https://i.dek.cx/qnd3.png)
+! [Screenshot 7](https://i.dek.cx/ab6w.png)
 
 ## Requirements
 
