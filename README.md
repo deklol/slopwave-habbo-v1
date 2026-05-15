@@ -45,6 +45,12 @@ extracted Director data
 - Thanks to LibreShockwave for Director/Shockwave parsing and runtime reference material: https://github.com/Quackster/LibreShockwave
 - Thanks to Project Dragon for inspiration around modern source-derived metadata and content configuration.
 
+## License
+
+The original Slopwave Habbo V1 browser runtime, packaging scripts, bridge code, and glue code in this repository are released under the MIT License. You can use, copy, modify, merge, publish, distribute, sublicense, and sell copies, but the copyright notice and license text must stay with copies or substantial portions of the software.
+
+Bundled third-party components and source-derived client assets keep their own licenses, notices, and rights. Roseau is credited above and includes its own AGPL license text under `server/Roseau-master/LICENCE.txt`.
+
 ## Repository Layout
 
 ```text
