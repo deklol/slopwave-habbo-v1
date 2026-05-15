@@ -1,0 +1,6 @@
+tmp/
+server/Roseau-master/log/
+*.log
+node_modules/
+.DS_Store
+Thumbs.db

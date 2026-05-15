@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:," />
+    <title>Habbo Hotel V1 Portable</title>
+    <script type="module" crossorigin src="/assets/index-Ctqd87f7.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-NzBqhPFW.css">
+      <script>
+      (function() {
+        document.documentElement.classList.add("runtime-game-only");
+        var params = new URLSearchParams(window.location.search);
+        var changed = false;
+        if (!params.has("version")) {
+          params.set("version", "release1");
+          changed = true;
+        }
+        if (!params.has("manifest") && !params.has("source")) {
+          params.set("manifest", "projectorrays");
+          changed = true;
+        }
+        if (!params.has("standalone")) {
+          params.set("standalone", "1");
+          changed = true;
+        }
+        if (!params.has("serverWs")) {
+          var wsProtocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+          params.set("serverWs", wsProtocol + "//" + window.location.host + "/ws");
+          changed = true;
+        }
+        if (changed) {
+          var nextUrl = window.location.pathname + "?" + params.toString() + window.location.hash;
+          window.history.replaceState(null, "", nextUrl);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <main id="app"></main>
+  </body>
+</html>

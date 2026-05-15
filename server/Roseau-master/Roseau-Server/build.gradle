@@ -1,0 +1,63 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1' // For Java 8
+}
+
+group = 'org.oldskooler'
+// version = '1.5'
+mainClassName = 'org.alexdev.roseau.Roseau'
+
+repositories {
+    maven { url 'https://jitpack.io' }
+    mavenCentral()
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+    toolchain { languageVersion = JavaLanguageVersion.of(11) }
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/io.netty/netty
+    implementation group: 'io.netty', name: 'netty', version: '3.5.3.Final'
+
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    implementation group: 'com.google.guava', name: 'guava', version: '11.0.2'
+
+    // https://mvnrepository.com/artifact/org.ini4j/ini4j
+    implementation group: 'org.ini4j', name: 'ini4j', version: '0.5.1'
+
+    // https://mvnrepository.com/artifact/com.jolbox/bonecp
+    implementation group: 'com.jolbox', name: 'bonecp', version: '0.7.1.RELEASE'
+
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.2'
+
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.2'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+
+// Configure the shadow jar (fat jar). Defaults to classifier "all".
+// The below sets the file name to the expected output
+tasks.shadowJar {
+    // Produces <project.name>-<project.version>.jar (no "-all" suffix).
+    archiveClassifier.set("")
+    archiveFileName.set("${project.name}-${project.version}.jar")
+}
+
+artifacts {
+    archives tasks.named("shadowJar")
+}
+
+test {
+    useJUnitPlatform()
+}
