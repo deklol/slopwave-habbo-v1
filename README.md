@@ -42,7 +42,8 @@ extracted Director data
 
 ## Credits
 
-- Roseau server: https://github.com/Quackster/Roseau by Quackster. This package includes a slightly modified Roseau server path so the V1 browser runtime can connect through the WebSocket bridge and preserve the old release1 room/session flow.
+- Thanks to ProjectorRays for Director/Shockwave decompilation and extraction tooling used in the source-data workflow: https://github.com/ProjectorRays/ProjectorRays
+- Thanks to Quackster for Roseau server: https://github.com/Quackster/Roseau (This package includes a slightly modified Roseau server path so the V1 browser runtime can connect through the WebSocket bridge and preserve the old release1 room/session flow.)
 - Thanks to dirplayer for Shockwave runtime inspiration: https://github.com/igorlira/dirplayer-rs
 - Thanks to LibreShockwave for Director/Shockwave parsing and runtime reference material: https://github.com/Quackster/LibreShockwave
 - Thanks to Project Dragon for inspiration around modern source-derived metadata and content configuration: https://gitlab.com/asgardjoe/dragon
