@@ -6,6 +6,8 @@ It is intentionally not the full multi-version development workspace. It exclude
 
 This is a small part of a bigger archiving/restoration project for pre-flash Habbo. I wanted to continue doing my part to preserve some of the golden days of the intenet.
 
+Playable [Demo](https://v1.dek.cx/?version=release1&manifest=projectorrays&standalone=1&serverWs=wss%3A%2F%2Fv1.dek.cx%2Fws)
+
 ## What It Is
 
 This is a browser-native Director/Shockwave compatibility runtime for Habbo release1.
