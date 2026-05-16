@@ -377,7 +377,9 @@ export function handleRelease1CataloguePurchaseResultPacket(
   }
 
   if (packetName === "ADDSTRIPITEM" || packetName === "PURCHASE_ADDSTRIPITEM") {
-    const purchasePending = packetName === "PURCHASE_ADDSTRIPITEM" || hasRelease1CataloguePurchasePending(host.movie);
+    const purchasePending = packetName === "ADDSTRIPITEM"
+      || packetName === "PURCHASE_ADDSTRIPITEM"
+      || hasRelease1CataloguePurchasePending(host.movie);
     const stripMode = purchasePending ? "last" : "new";
     hideRelease1CatalogueConfirm(host, release);
     host.movie.setProperty("release1CatalogueLastPurchaseResult", {

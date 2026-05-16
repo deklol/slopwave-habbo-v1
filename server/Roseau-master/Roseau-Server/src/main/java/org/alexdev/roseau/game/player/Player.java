@@ -108,7 +108,17 @@ public class Player implements Entity {
 	public void dispose() {
 
 		if (this.network.getServerPort() == Roseau.getServerPort()) {
+			if (this.roomEntity != null && this.roomEntity.getRoom() != null) {
+				this.roomEntity.getRoom().leaveRoom(this, false);
+			}
+
 			this.disposeRoomConnections();
+
+			if (this.details != null && this.details.getID() > 0) {
+				this.details.setAuthenticated(false);
+				Roseau.getDao().getPlayer().updateLastLogin(this.details);
+				Roseau.getGame().getPlayerManager().getPlayers().remove(this.network.getConnectionId());
+			}
 
 			for (Room room : this.getRooms()) {
 				room.dispose();
