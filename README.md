@@ -1,4 +1,4 @@
-![Slopwave Logo](https://i.dek.cx/mgiq.png)
+![Slopwave Logo](https://i.dek.cx/tq10.png)
 
 # Habbo V1 Browser Runtime
 
