@@ -6,6 +6,8 @@ const listenHost = process.env.ROSEAU_WS_HOST ?? "127.0.0.1";
 const listenPort = parsePort(process.env.ROSEAU_WS_PORT, 12320);
 const upstreamHost = process.env.ROSEAU_TCP_HOST ?? "127.0.0.1";
 const upstreamPort = parsePort(process.env.ROSEAU_TCP_PORT, 37120);
+const heartbeatIntervalMs = parsePositiveInteger(process.env.ROSEAU_WS_HEARTBEAT_INTERVAL_MS, 15000);
+const heartbeatTimeoutMs = parsePositiveInteger(process.env.ROSEAU_WS_HEARTBEAT_TIMEOUT_MS, 10000);
 
 let connectionCounter = 0;
 
@@ -15,6 +17,9 @@ const server = net.createServer((socket) => {
   let upgraded = false;
   let upstream;
   let frameBuffer = Buffer.alloc(0);
+  let heartbeatTimer;
+  let lastPingAt = 0;
+  let awaitingPong = false;
 
   socket.on("data", (chunk) => {
     if (upgraded) {
@@ -28,8 +33,11 @@ const server = net.createServer((socket) => {
           upstream?.end();
           socket.end();
         },
-        pong(payload) {
+        ping(payload) {
           socket.write(encodeWebSocketFrame(payload, 0x0a));
+        },
+        pong() {
+          awaitingPong = false;
         }
       });
       return;
@@ -66,6 +74,7 @@ const server = net.createServer((socket) => {
 
       upgraded = true;
       log(id, `connected browser ws -> ${upstreamHost}:${upstreamPort}`);
+      startHeartbeat();
 
       const leftover = handshakeBuffer.subarray(headerEnd + 4);
       if (leftover.length > 0) {
@@ -88,6 +97,7 @@ const server = net.createServer((socket) => {
   });
 
   socket.on("close", () => {
+    stopHeartbeat();
     if (upstream && !upstream.destroyed) {
       upstream.end();
       setTimeout(() => {
@@ -99,9 +109,44 @@ const server = net.createServer((socket) => {
     log(id, "browser closed");
   });
   socket.on("error", (error) => {
+    stopHeartbeat();
     upstream?.destroy();
     log(id, `browser error ${error.message}`);
   });
+
+  function startHeartbeat() {
+    if (heartbeatIntervalMs <= 0) {
+      return;
+    }
+
+    heartbeatTimer = setInterval(() => {
+      if (socket.destroyed) {
+        stopHeartbeat();
+        return;
+      }
+
+      const now = Date.now();
+      if (awaitingPong && now - lastPingAt >= heartbeatTimeoutMs) {
+        log(id, `heartbeat timeout after ${now - lastPingAt}ms`);
+        upstream?.destroy();
+        socket.destroy();
+        stopHeartbeat();
+        return;
+      }
+
+      lastPingAt = now;
+      awaitingPong = true;
+      socket.write(encodeWebSocketFrame(Buffer.from(String(now)), 0x09));
+    }, heartbeatIntervalMs);
+    heartbeatTimer.unref();
+  }
+
+  function stopHeartbeat() {
+    if (heartbeatTimer) {
+      clearInterval(heartbeatTimer);
+      heartbeatTimer = undefined;
+    }
+  }
 });
 
 server.listen(listenPort, listenHost, () => {
@@ -119,6 +164,14 @@ function parsePort(value, fallback) {
   const parsed = value === undefined ? fallback : Number.parseInt(value, 10);
   if (!Number.isInteger(parsed) || parsed <= 0 || parsed > 65535) {
     throw new Error(`Invalid port: ${value}`);
+  }
+  return parsed;
+}
+
+function parsePositiveInteger(value, fallback) {
+  const parsed = value === undefined ? fallback : Number.parseInt(value, 10);
+  if (!Number.isInteger(parsed) || parsed < 0) {
+    throw new Error(`Invalid positive integer: ${value}`);
   }
   return parsed;
 }
@@ -192,6 +245,11 @@ function drainWebSocketFrames(buffer, handlers) {
       continue;
     }
     if (opcode === 0x09) {
+      handlers.ping(payload);
+      offset += frameLength;
+      continue;
+    }
+    if (opcode === 0x0a) {
       handlers.pong(payload);
       offset += frameLength;
       continue;

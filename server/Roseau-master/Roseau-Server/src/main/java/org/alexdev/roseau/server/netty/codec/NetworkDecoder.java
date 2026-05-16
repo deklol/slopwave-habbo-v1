@@ -42,8 +42,7 @@ public class NetworkDecoder extends FrameDecoder {
 
 		try  {		
 
-			if (buffer.readableBytes() < 4) { // 3 letter long B64 length + 2 letter long B64 header
-				channel.close();
+			if (buffer.readableBytes() < 4) {
 				return null;
 			}	
 
@@ -52,6 +51,8 @@ public class NetworkDecoder extends FrameDecoder {
 			if (player == null) {
 				return null;
 			}
+
+			buffer.markReaderIndex();
 			
 			byte[] message_length = buffer.readBytes(4).array();
 			int length = 0;
@@ -59,6 +60,12 @@ public class NetworkDecoder extends FrameDecoder {
 			try {
 				length = Integer.parseInt(new String(message_length).trim());
 			} catch (NumberFormatException nfe) {
+				channel.close();
+				return null;
+			}
+
+			if (buffer.readableBytes() < length) {
+				buffer.resetReaderIndex();
 				return null;
 			}
 			
