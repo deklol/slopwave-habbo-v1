@@ -1,3 +1,5 @@
+![Slopwave Logo](https://i.dek.cx/mgiq.png)
+
 # Habbo V1 Browser Runtime
 
 This repository is a standalone Habbo release1 browser runtime package. It contains the built browser client, the V1-relevant TypeScript runtime source, source-derived assets and JSON metadata, the Roseau V1 server, and the small bridge/launcher tools required to run it locally.
