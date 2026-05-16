@@ -1,4 +1,6 @@
-![Slopwave Logo](https://i.dek.cx/tq10.png)
+<p align="center">
+  <img src="https://i.dek.cx/tq10.png" />
+</p>
 
 # Habbo V1 Browser Runtime
 
